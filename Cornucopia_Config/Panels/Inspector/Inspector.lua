@@ -1,5 +1,5 @@
 --[[
-Copyright 2010-2013 João Cardoso
+Copyright 2010-2012 João Cardoso
 Cornucopia is distributed under the terms of the GNU General Public License (or the Lesser GPL).
 This file is part of Cornucopia.
 
@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with Cornucopia. If not, see <http://www.gnu.org/licenses/>.
 --]]
 
-local Inspector = Cornucopia:CreatePanel('Inspector', 'Center', 50)
+local Inspector = Cornucopia:CreatePanel('Inspector', 'CENTER', 50)
 local Tabs = SushiTabGroup(Inspector)
 local L = Cornucopia.Locals
 
@@ -39,7 +39,8 @@ function Inspector:Startup()
 	Tabs:SetCall('OnSelection', function(_, ...) self:ShowTab(...) end)
 	Tabs:SetPoint('TOPLEFT', self, 'BOTTOMLEFT', 10, 1)
 	
-	self.Bg:SetTexture('Interface\\FrameGeneral\\UI-Background-Marble', true, true)
+	CornucopiaInspectorBg:SetTexture('Interface\\FrameGeneral\\UI-Background-Marble', true, true)
+	self.title = CornucopiaInspectorTitleText
 	self.Startup = nil
 	self:Hide()
 end
@@ -59,7 +60,7 @@ function Inspector:ShowBar(bar)
 		end
 
 		self.bar = bar
-		self.TitleText:SetText(bar:GetDisplayName())
+		self.title:SetText(bar:GetName())
 		self:AddTab(self.Metrics)
 		self:UpdateSize()
 		self:Show()

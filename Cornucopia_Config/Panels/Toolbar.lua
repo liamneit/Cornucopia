@@ -1,5 +1,5 @@
 --[[
-Copyright 2010-2013 João Cardoso
+Copyright 2010-2012 João Cardoso
 Cornucopia is distributed under the terms of the GNU General Public License (or the Lesser GPL).
 This file is part of Cornucopia.
 
@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with Cornucopia. If not, see <http://www.gnu.org/licenses/>.
 --]]
 
-local Toolbar = Cornucopia:CreatePanel('Toolbar', 'Top', 30)
+local Toolbar = Cornucopia:CreatePanel('Toolbar', 'TOP', 30)
 local Dropdown = CreateFrame('Frame', '&parentDropdown', Toolbar, 'UIDropDownMenuTemplate')
 local L, Buttons  = Cornucopia.Locals, {}
 
@@ -26,8 +26,8 @@ local L, Buttons  = Cornucopia.Locals, {}
 
 function Toolbar:Startup()	
 	-- Close Button
-	self.CloseButton:SetPoint('TOPRIGHT', 4, 1)
-	self.CloseButton:SetScript('OnClick', function()
+	CornucopiaToolbarCloseButton:SetPoint('TOPRIGHT', 4, 1)
+	CornucopiaToolbarCloseButton:SetScript('OnClick', function()
 		Cornucopia:HideConfig()
 	end)
 	
@@ -37,23 +37,23 @@ function Toolbar:Startup()
 	corner:SetSize(31, 31)
 
 	-- Border
-	self.TopTileStreaks:SetPoint('TOPRIGHT', -2, -6)
-	self.TopTileStreaks:SetPoint('TOPLEFT', 2, -6)
-	self.Bg:SetPoint('TOPLEFT', 2, -6)
-	self.TitleBg:Hide()
+	CornucopiaToolbarTopTileStreaks:SetPoint('TOPRIGHT', -2, -6)
+	CornucopiaToolbarTopTileStreaks:SetPoint('TOPLEFT', 2, -6)
+	CornucopiaToolbarBg:SetPoint('TOPLEFT', 2, -6)
+	CornucopiaToolbarTitleBg:Hide()
 	
-	self.TopBorder:SetTexCoord(0, 1, 0.2734375, 0.203125)
-	self.TopBorder:SetPoint('TOPRIGHT', -11, 1)
-	self.TopBorder:SetPoint('TOPLEFT', 8, 1)
-	self.TopBorder:SetHeight(9)
+	CornucopiaToolbarTopBorder:SetTexCoord(0, 1, 0.2734375, 0.203125)
+	CornucopiaToolbarTopBorder:SetPoint('TOPRIGHT', -11, 1)
+	CornucopiaToolbarTopBorder:SetPoint('TOPLEFT', 8, 1)
+	CornucopiaToolbarTopBorder:SetHeight(9)
 	
-	self.RightBorder:SetPoint('TOPRIGHT', 1, -10)
-	self.TopRightCorner:SetTexCoord(0.1328125, 0.21875, 0.984375, 0.8984375)
-	self.TopRightCorner:SetPoint('TOPRIGHT', 0, 1)
-	self.TopRightCorner:SetSize(11, 11)
+	CornucopiaToolbarRightBorder:SetPoint('TOPRIGHT', 1, -10)
+	CornucopiaToolbarTopRightCorner:SetTexCoord(0.1328125, 0.21875, 0.984375, 0.8984375)
+	CornucopiaToolbarTopRightCorner:SetPoint('TOPRIGHT', 0, 1)
+	CornucopiaToolbarTopRightCorner:SetSize(11, 11)
 	
-	self.TopLeftCorner:SetTexCoord(0.0078125, 0.1171875, 0.7421875, 0.6328125)
-	self.TopLeftCorner:SetSize(14, 14)
+	CornucopiaToolbarTopLeftCorner:SetTexCoord(0.0078125, 0.1171875, 0.7421875, 0.6328125)
+	CornucopiaToolbarTopLeftCorner:SetSize(14, 14)
 	
 	-- Buttons
 	self:Update()
@@ -272,7 +272,7 @@ local options = {
 	{
 	    text = L['Rulers'],
 	    tooltipTitle = L['Rulers'],
-	    tooltipText = L.RulersDesc,
+	    tooltipText = L['RulersDesc'],
 	    func = function() Cornucopia_HideRulers = not Cornucopia_HideRulers or nil end,
 	    checked = function() return not Cornucopia_HideRulers end,
 	    tooltipOnButton = 1,
@@ -281,7 +281,7 @@ local options = {
    	{
 	    text = L['Minimap Button'],
 	    tooltipTitle = L['Minimap Button'],
-	    tooltipText = L.MinimapButtonDesc,
+	    tooltipText = L['MinimapButtonDesc'],
 	    func = function()
 	    	if Cornucopia_HideButton then
 	    		CornucopiaButton:Show()
@@ -293,19 +293,6 @@ local options = {
 	    end,
 	    
 	    checked = function() return not Cornucopia_HideButton end,
-	    tooltipOnButton = 1,
-	    isNotRadio = 1
-   	},
-   	{
-	    text = L['Vehicle Art'],
-	    tooltipTitle = L['Vehicle Art'],
-	    tooltipText = L.VehicleArtDesc,
-	    func = function()
-	    	Cornucopia_HideVehicle = not Cornucopia_HideVehicle or nil
-			Cornucopia:ToggleVehicle()
-	    end,
-	    
-	    checked = function() return not Cornucopia_HideVehicle end,
 	    tooltipOnButton = 1,
 	    isNotRadio = 1
    	},
@@ -324,7 +311,7 @@ local options = {
    	},
    	{
 	    text = L['Opaque'],
-		checked = function() return Cornucopia_Opaque == true end,
+		checked = function() return Cornucopia_Opaque end,
 	    func = function()
 	    	Cornucopia_Opaque = true
 	    	Cornucopia:UpdateBackdrop()

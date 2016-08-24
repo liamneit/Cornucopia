@@ -1,5 +1,5 @@
 --[[
-Copyright 2010-2013 João Cardoso
+Copyright 2010-2012 João Cardoso
 Cornucopia is distributed under the terms of the GNU General Public License (or the Lesser GPL).
 This file is part of Cornucopia.
 
@@ -39,7 +39,7 @@ end
 function Extra:OnUnlock()
 	Frame:Show()
 	Frame:SetAlpha(1)
-	Button.style:SetTexture('Interface\\ExtraButton\\Default.blp')
+	Button.style:SetTexture('Interface\\UnitPowerBarAlt\\SpellPush-Frame-Ysera')
 	Button:Show()
 	
 	local fake = self.fake or Button:CreateTexture()

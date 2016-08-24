@@ -1,5 +1,5 @@
 --[[
-Copyright 2010-2013 João Cardoso
+Copyright 2010-2012 João Cardoso
 Cornucopia is distributed under the terms of the GNU General Public License (or the Lesser GPL).
 This file is part of Cornucopia.
 
@@ -29,9 +29,13 @@ local Bar = Cornucopia:CreateBar('Zone', {
 	}
 })
 
-function Bar:OnInitialize()
+function Bar:OnInitialize() -- ALL TEMP!! NOT DONE!!
 	MinimapZoneTextButton:SetParent(self)
 	MinimapZoneTextButton:SetPoint('CENTER', 5, 0)
+	
+	--MinimapBorderTop:SetParent(self)
+	--MinimapBorderTop:SetTexCoord(1, 0, 1, 0)
+	--MinimapBorderTop:SetAllPoints()
 	MinimapBorderTop:Hide() -- For now, disabled
 	
 	self:SetSize(160, 32)

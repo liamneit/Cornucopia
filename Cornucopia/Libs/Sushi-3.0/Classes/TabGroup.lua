@@ -1,5 +1,5 @@
 --[[
-Copyright 2008-2013 João Cardoso
+Copyright 2008-2012 João Cardoso
 Sushi is distributed under the terms of the GNU General Public License (or the Lesser GPL).
 This file is part of Sushi.
 
@@ -18,7 +18,7 @@ along with Sushi. If not, see <http://www.gnu.org/licenses/>.
 --]]
 
 local Group = SushiGroup
-local Tabs = MakeSushi(2, 'Frame', 'TabGroup', nil, nil, Group)
+local Tabs = MakeSushi(1, 'Frame', 'TabGroup', nil, nil, Group)
 if not Tabs then
 	return
 end
@@ -86,7 +86,7 @@ end
 
 --[[ Selection ]]--
 
-function Tabs:SetSelection(selection)
+function Tabs:SelectTab(selection)
 	self.selectedTab = selection
 	self:UpdateChildren()
 	
@@ -120,7 +120,6 @@ Tabs.Append = Tabs.AddTab
 Tabs.Clear = Tabs.ClearTabs
 Tabs.Get = Tabs.GetTab
 
-Tabs.Select = Tabs.SetSelection
-Tabs.SelectTab = Tabs.SetSelection
-Tabs.SetValue = Tabs.SetSelection
+Tabs.Select = Tabs.SelectTab
+Tabs.SetValue = Tabs.SelectTab
 Tabs.GetValue = Tabs.GetSelection

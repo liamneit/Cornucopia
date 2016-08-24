@@ -1,5 +1,5 @@
 --[[
-Copyright 2010-2013 João Cardoso
+Copyright 2010-2012 João Cardoso
 Cornucopia is distributed under the terms of the GNU General Public License (or the Lesser GPL).
 This file is part of Cornucopia.
 
@@ -99,7 +99,7 @@ function Metrics:AnchorDropdown()
 	-- Create array of names and sort
 	for id, target in Cornucopia:IterateBars() do
 		if not IsDependant(target, bar) then
-			tinsert(t, target:GetDisplayName())
+			tinsert(t, target:GetName())
 		end
 	end
 	sort(t)
@@ -107,7 +107,7 @@ function Metrics:AnchorDropdown()
 	-- Associate names to frames
 	for _, name in pairs(t) do
 		for id, target in Cornucopia:IterateBars() do
-			if target:GetDisplayName() == name then
+			if target:GetName() == name then
 				drop:AddLine(id, name)
 				break
 			end

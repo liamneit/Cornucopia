@@ -1,5 +1,5 @@
 --[[
-Copyright 2010-2013 João Cardoso
+Copyright 2010-2012 João Cardoso
 Cornucopia is distributed under the terms of the GNU General Public License (or the Lesser GPL).
 This file is part of Cornucopia.
 
@@ -21,7 +21,6 @@ local L = Cornucopia.Locals
 local Bar = Cornucopia:CreateBar('Minimap', {
 	sets = 'Cornucopia_Minimap_Sets',
 	name = 'Minimap',
-	vehicles = true,
 	defaults = {
 		buttons = {
 			MiniMapWorldMapButton = 46.8,
@@ -70,7 +69,7 @@ function Bar:OnInitialize()
 	-- Buttons
 	if not IsAddOnLoaded('MinimapButtonFrame') then
 		self:TweakButtons()
-		self:InitializeButtons(MiniMapWorldMapButton, MiniMapTrackingButton, MiniMapMailFrame)
+		self:InitializeButtons(MiniMapWorldMapButton, MiniMapTrackingButton, MiniMapLFGFrame, MiniMapMailFrame, MiniMapBattlefieldFrame)
 		self:InitializeButtons(select(6, MinimapBackdrop:GetChildren()))
 		self:InitializeButtons(select(4, Minimap:GetChildren()))
 	else

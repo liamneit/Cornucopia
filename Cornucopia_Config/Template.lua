@@ -1,5 +1,5 @@
 --[[
-Copyright 2010-2013 João Cardoso
+Copyright 2010-2012 João Cardoso
 Cornucopia is distributed under the terms of the GNU General Public License (or the Lesser GPL).
 This file is part of Cornucopia.
 
@@ -395,6 +395,6 @@ function Cornucopia:SetLevel(level)
 	self.sets.level = level
 end
 
-function Cornucopia:GetDisplayName()
+function Cornucopia:GetName()
 	return L[self.name or self.id] .. (self.group and (' #'..self.index) or '')
 end
