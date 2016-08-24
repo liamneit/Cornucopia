@@ -1,0 +1,14 @@
+## Interface: 50400
+## Title: Cornucopia Watch
+## Notes: Quest tracking, durability, capture points,...
+
+## Author: Jaliborc (João Cardoso)
+## X-License: GNU General Public License Version 3
+## X-Category: Quest
+
+## Dependencies: Cornucopia
+## SavedVariablesPerCharacter: Cornucopia_Objectives_Settings, Cornucopia_Durability_Settings, Cornucopia_Capture_Settings
+
+Objectives.lua
+Durability.lua
+Capture.lua

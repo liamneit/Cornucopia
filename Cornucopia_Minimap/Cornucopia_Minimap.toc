@@ -1,0 +1,17 @@
+## Interface: 50400
+## Title: Cornucopia Minimap
+## Notes: Minimap, zone and instance bars with themes to pick from.
+
+## Author: Jaliborc (João Cardoso)
+## X-License: GNU General Public License Version 3
+## X-Category: Minimap
+
+## Dependencies: Cornucopia
+## OptionalDeps: MinimapButtonFrame
+## SavedVariablesPerCharacter: Cornucopia_Minimap_Sets, Cornucopia_Zone_Sets, Cornucopia_Instance_Sets
+
+Minimap.lua
+Buttons.lua
+Zone.lua
+Instance.lua
+Themes\Themes.lua

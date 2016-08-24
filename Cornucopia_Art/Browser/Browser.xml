@@ -1,0 +1,167 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+  <!--
+   Copyright 2010-2013 João Cardoso
+   Cornucopia is distributed under the terms of the GNU General Public License (or the Lesser GPL).
+   This file is part of Cornucopia.
+   
+   Cornucopia is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+   
+   Cornucopia is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+   
+   You should have received a copy of the GNU General Public License
+   along with Cornucopia. If not, see <http://www.gnu.org/licenses/>.
+  -->
+  
+	<Button name="CornucopiaArtBrowser_ButtonTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="244" y="22"/>
+		</Size>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture parentKey="stripe">
+					<Anchors>
+						<Anchor point="TOPLEFT" x="1" y="0"/>
+						<Anchor point="BOTTOMRIGHT" x="-1" y="0"/>
+					</Anchors>
+					<Color a=".08" r="1" g="1" b="1"/>
+				</Texture>
+			</Layer>
+			
+			<Layer level="BORDER">
+				<Texture parentKey="icon">
+					<Size>
+						<AbsDimension x="22" y="22"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" x="5" y="0"/>
+					</Anchors>
+				</Texture>
+				<FontString parentKey="text" inherits="GameFontHighlightLeft">
+					<Size>
+						<AbsDimension x="208" y="11"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" x="30" y="-1"/>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		
+		<Scripts>
+			<OnLoad>
+				self.icon:SetNonBlocking(true)
+			</OnLoad>
+			<OnClick>
+				CornucopiaArtBrowser:Select(self)
+			</OnClick>
+		</Scripts>
+		
+		<HighlightTexture file="Interface\QuestFrame\UI-QuestTitleHighlight" alphaMode="ADD"/>
+	</Button>
+	
+	<Frame name="CornucopiaBrowserTemplate" virtual="true">
+		<Size x="198" y="230"/>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentBg" inherits="QuestPortrait-MrBrownstone">
+					<Anchors>
+						<Anchor point="TOPLEFT"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY" textureSubLevel="-1">
+				<Texture name="$parentShadow" file="Interface\TalentFrame\PetTalent-ShadowOverlay" setAllPoints="true">
+					<TexCoords left="0" right="0.537109375" top="0" bottom="0.791015625"/>
+				</Texture>
+				<Texture name="$parentTopBg" inherits="QuestPortrait-StoneSwirls-Top">
+					<Anchors>
+						<Anchor point="TOPLEFT" y="16"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY">
+				<Texture name="$parentBotLeftCorner" inherits="UI-Frame-BotCornerLeft" parentKey="BorderBottomLeft">
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" x="-5" y="-5"/>
+					</Anchors>
+				</Texture>
+				<Texture name="$parentBotRightCorner" inherits="UI-Frame-BotCornerRight" parentKey="BorderBottomRight">
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT" x="2" y="-5"/>
+					</Anchors>
+				</Texture>
+				<Texture name="$parentTopBorder" inherits="_UI-Frame-TitleTile" parentKey="BorderTop">
+					<Anchors>
+						<Anchor point="TOPLEFT" x="-1" y="20"/>
+						<Anchor point="TOPRIGHT" x="1" y="20"/>
+					</Anchors>
+				</Texture>
+				<Texture name="$parentBottomBorder" inherits="_UI-Frame-Bot" parentKey="BorderBottom">
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" relativeTo="$parentBotLeftCorner" relativePoint="BOTTOMRIGHT" y="0"/>
+						<Anchor point="BOTTOMRIGHT" relativeTo="$parentBotRightCorner" relativePoint="BOTTOMLEFT" y="0"/>
+					</Anchors>
+				</Texture>
+				<Texture name="$parentLeftBorder" inherits="!UI-Frame-LeftTile" parentKey="BorderLeft">
+					<Anchors>
+						<Anchor point="TOPLEFT" x="-5"/>
+						<Anchor point="BOTTOMLEFT" relativeTo="$parentBotLeftCorner" relativePoint="TOPLEFT"/>
+					</Anchors>
+				</Texture>
+				<Texture name="$parentRightBorder" inherits="!UI-Frame-RightTile" parentKey="BorderRight">
+					<Anchors>
+						<Anchor point="TOPRIGHT" x="3"/>
+						<Anchor point="BOTTOMRIGHT" relativeTo="$parentBotRightCorner" relativePoint="TOPRIGHT" x="1"/>
+					</Anchors>
+				</Texture>	
+			</Layer>
+			<Layer level="OVERLAY" textureSubLevel="1">
+				<Texture name="$parentNameplate" inherits="QuestPortrait-Nameplate">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" x="0" y="12"/>
+					</Anchors>
+				</Texture>
+				<Texture name="$parentBlankNameplate" inherits="QuestPortrait-Divider_noname">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" x="0" y="12"/>
+					</Anchors>
+				</Texture>
+				<FontString name="$parentNameText" inherits="GameFontNormal">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parentNameplate" x="22" y="-12"/>
+						<Anchor point="BOTTOMRIGHT" relativeTo="$parentNameplate" x="-22" y="12"/>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="OVERLAY" textureSubLevel="2">
+				<Texture name="$parentTopLeft" inherits="QuestPortrait-Corner_UL">
+					<Anchors>
+						<Anchor point="TOPLEFT" x="-6" y="24"/>
+					</Anchors>
+				</Texture>
+				<Texture name="$parentTopRight" inherits="QuestPortrait-Corner_UR">
+					<Anchors>
+						<Anchor point="TOPRIGHT" x="7" y="24"/>
+					</Anchors>
+				</Texture>
+				<Texture name="$parentBottomLeft" inherits="QuestPortrait-Corner_BL">
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" x="-6" y="-26"/>
+					</Anchors>
+				</Texture>
+				<Texture name="$parentBottomRight" inherits="QuestPortrait-Corner_BR">
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT" x="7" y="-26"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+	</Frame>
+</Ui>

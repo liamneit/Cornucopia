@@ -1,0 +1,13 @@
+## Interface: 50400
+## Title: Cornucopia XP
+## Notes: Experience and reputation bars
+
+## Author: Jaliborc (João Cardoso)
+## X-License: GNU General Public License Version 3
+## X-Category: Quests
+
+## Dependencies: Cornucopia
+## SavedVariablesPerCharacter: Cornucopia_XP_Sets, Cornucopia_Rep_Sets
+
+Experience.lua
+Reputation.lua

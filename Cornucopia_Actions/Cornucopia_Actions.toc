@@ -1,0 +1,18 @@
+## Interface: 50400
+## Title: Cornucopia Actions
+## Notes: Action buttons, pet, stances, totems and possess bars
+
+## Author: Jaliborc (João Cardoso)
+## X-License: GNU General Public License Version 3
+## X-Category: Action Bars
+
+## Dependencies: Cornucopia
+## SavedVariablesPerCharacter: Cornucopia_Actions_Sets, Cornucopia_Stances_Sets, Cornucopia_Pet_Sets, Cornucopia_Leave_Sets, Cornucopia_ExtraAction_Sets
+
+Actions.lua
+Specials.lua
+Pet.lua
+LeaveVehicle.lua
+ExtraActions.lua
+
+Disable.lua

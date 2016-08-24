@@ -1,0 +1,13 @@
+## Interface: 50400
+## Title: Cornucopia
+## Notes: An elegant interface builder
+
+## Author: Jaliborc (João Cardoso)
+## X-License: GNU General Public License Version 3
+## SavedVariables: Cornucopia_Tutorials, Cornucopia_HideButton, Cornucopia_HideVehicle
+## Version: 3.16
+
+Cornucopia.lua
+Bindings.xml
+Button.lua
+Panel.lua

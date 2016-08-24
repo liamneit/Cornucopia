@@ -1,0 +1,120 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+  <!--
+   Copyright 2010-2013 João Cardoso
+   Cornucopia is distributed under the terms of the GNU General Public License (or the Lesser GPL).
+   This file is part of Cornucopia.
+   
+   Cornucopia is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+   
+   Cornucopia is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+   
+   You should have received a copy of the GNU General Public License
+   along with Cornucopia. If not, see <http://www.gnu.org/licenses/>.
+  -->
+  
+  <Button name="CornucopiaConsolidateProxy" inherits="AuraButtonTemplate, SecureHandlerEnterLeaveTemplate">
+    <Size x="30" y="30"/>
+		<Scripts>
+			<OnLoad>
+        local icon = _G[self:GetName() .. "Icon"]
+				icon:SetTexture("Interface\\Buttons\\BuffConsolidation")
+				icon:SetTexCoord(0, 0.5, 0, 1)
+				icon:ClearAllPoints()
+				icon:SetPoint("CENTER", -2, -2)
+				icon:SetSize(62, 62)
+        
+        SecureHandler_OnLoad(self)
+        self:SetAttribute("_onenter", [[
+          self:GetFrameRef("target"):Show()
+        ]])
+        
+        self:SetAttribute("_onleave", [[
+          self:GetFrameRef("target"):Hide()
+        ]])
+			</OnLoad>
+		</Scripts>
+	</Button>
+  
+	<Button name="CornucopiaAuraTemplate" inherits="SecureActionButtonTemplate" virtual="true">
+    <Attributes>
+			<Attribute name="type" value="cancelaura"/>
+		</Attributes>
+		<Scripts>
+			<OnLoad>
+				self:RegisterForClicks("RightButtonUp")
+        self:SetScript("OnUpdate", nil)
+			</OnLoad>
+			<OnEnter>
+				GameTooltip:SetOwner(self, "ANCHOR_BOTTOMLEFT")
+				GameTooltip:SetFrameLevel(self:GetFrameLevel() + 2)
+        
+				local slot = self:GetAttribute("target-slot")
+				if slot then
+					GameTooltip:SetInventoryItem("player", slot)
+				else
+					GameTooltip:SetUnitAura("player", self:GetID(), self:GetAttribute('filter'))
+				end
+			</OnEnter>
+      <OnAttributeChanged>
+        if name ~= "index" then
+          local name, icon, count, type, expire, ratio, _ = self:GetName()
+          local slot = self:GetAttribute("target-slot")
+          local filter = self:GetAttribute('filter')
+          local border = _G[name .. 'Border']
+          local harm = filter == 'HARMFUL'
+          local symbol = self.symbol
+
+          if not slot then
+            icon, count, type, _, expire = select(3, UnitAura('player', self:GetID(), filter))
+            ratio = 1
+        
+            if harm then
+              if ENABLE_COLORBLIND_MODE ~= "1" then
+                local color = DebuffTypeColor[type or 'none']
+                border:SetVertexColor(color.r, color.g, color.b)
+              elseif type then
+                symbol:SetText(DebuffTypeSymbol[type])
+                symbol:Show()
+              else
+                symbol:Hide()
+              end
+            end
+          else
+            local _, mainHand, _, _, offHand, _ = GetWeaponEnchantInfo()
+            icon = GetInventoryItemTexture("player", slot)
+            expire = (slot == 16) and mainHand or offHand
+            ratio, count = 1000, 0
+          end
+        
+          if slot or harm then
+            border:Show()
+          else
+            border:Hide()
+          end
+        
+          if expire > 0 then
+            self.expire = expire
+            self.ratio = ratio
+            self:SetScript('OnUpdate', Cornucopia_AuraUpdate)
+          else
+            self:SetScript('OnUpdate', nil)
+            self.duration:Hide()
+          end
+          
+          self.count:SetText(count > 0 and count or '')
+          _G[name .. 'Icon']:SetTexture(icon)
+        end
+      </OnAttributeChanged>
+		</Scripts>
+	</Button>
+ 
+  <Button name="CornucopiaBuffTemplate" inherits="TempEnchantButtonTemplate, CornucopiaAuraTemplate" virtual="true"></Button>
+  <Button name="CornucopiaDebuffTemplate" inherits="DebuffButtonTemplate, CornucopiaAuraTemplate" virtual="true"></Button>
+</Ui>

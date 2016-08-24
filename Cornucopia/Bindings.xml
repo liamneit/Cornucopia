@@ -1,0 +1,5 @@
+<Bindings>
+	<Binding name="Toggle Configuration Mode" header="CORNUCOPIA">
+		Cornucopia:ToggleConfig()
+	</Binding>
+</Bindings>

@@ -1,0 +1,13 @@
+## Interface: 50400
+## Title: Cornucopia Art
+## Notes: 
+
+## Author: Jaliborc (João Cardoso)
+## X-License: GNU General Public License Version 3
+## X-Category: Artwork
+
+## Dependencies: Cornucopia
+## SavedVariablesPerCharacter: Cornucopia_Art_Sets
+
+Art.lua
+Defaults.lua

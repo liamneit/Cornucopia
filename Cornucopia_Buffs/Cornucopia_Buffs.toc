@@ -1,0 +1,15 @@
+## Interface: 50400
+## Title: Cornucopia Buffs
+## Notes: Player buffs and debbufs bars
+
+## Author: Jaliborc (João Cardoso)
+## X-License: GNU General Public License Version 3
+## X-Category: Buffs & Debuffs
+
+## Dependencies: Cornucopia
+## SavedVariablesPerCharacter: Cornucopia_Buffs_Sets, Cornucopia_Debuffs_Sets
+
+Auras.xml
+Buffs.lua
+Debuffs.lua
+Global.lua

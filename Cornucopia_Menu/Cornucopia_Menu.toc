@@ -1,0 +1,13 @@
+## Interface: 50400
+## Title: Cornucopia Menus
+## Notes: Menu and bags bars
+
+## Author: Jaliborc (João Cardoso)
+## X-License: GNU General Public License Version 3
+## X-Category:
+
+## Dependencies: Cornucopia_Actions
+## SavedVariablesPerCharacter: Cornucopia_Menu_Sets, Cornucopia_Bags_Sets
+
+Menu.lua
+Bags.lua

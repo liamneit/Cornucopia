@@ -1,0 +1,42 @@
+## Interface: 50400
+## Title: Cornucopia Config
+
+## Notes: Load on demand configuration for Cornucopia
+## Author: Jaliborc (João Cardoso)
+## X-License: GNU General Public License Version 3
+
+## SavedVariables: Cornucopia_Opaque, Cornucopia_HideRulers, Cornucopia_InspectorX, Cornucopia_InspectorY, Cornucopia_ToolbarX, Cornucopia_ToolbarY
+## OptionalDeps: LibStub, Poncho-1.0, Sushi-3.0, CustomTutorials-2.1
+## Dependencies: Cornucopia
+## LoadOnDemand: 1
+
+..\Cornucopia\Libs\LibStub\LibStub.lua
+..\Cornucopia\Libs\Poncho-1.0\Poncho-1.0.xml
+..\Cornucopia\Libs\Sushi-3.0\Sushi-3.0.xml
+..\Cornucopia\Libs\CustomTutorials-2.1\CustomTutorials-2.1.lua
+
+Localization\English.lua
+Localization\Portuguese.lua
+Localization\German.lua
+Localization\Chinese.lua
+Localization\Korean.lua
+Localization\Russian.lua
+
+Utility.lua
+Template.lua
+Configuration.lua
+
+Panels\Inspector\Inspector.lua
+Panels\Inspector\Group.lua
+Panels\Inspector\Metrics.lua
+Panels\Toolbar.lua
+Panels\Tutorials.lua
+
+..\Cornucopia_Actions\Binder.lua
+..\Cornucopia_Actions\Actions_Config.lua
+
+..\Cornucopia_Art\Config\Options.lua
+..\Cornucopia_Art\Browser\Database.lua
+..\Cornucopia_Art\Browser\Browser.xml
+..\Cornucopia_Art\Browser\Browser.lua
+..\Cornucopia_Art\Config\Tools.lua
