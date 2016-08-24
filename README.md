@@ -1,4 +1,4 @@
-# Cornucopia
+# Cornucopia edited for WOD
 
 
-For Legion
+Actually the code in use based on a newer Conucopia Update from 2013. 
