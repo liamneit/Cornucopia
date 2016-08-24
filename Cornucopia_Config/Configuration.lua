@@ -1,5 +1,5 @@
 --[[
-Copyright 2010-2012 João Cardoso
+Copyright 2010-2013 João Cardoso
 Cornucopia is distributed under the terms of the GNU General Public License (or the Lesser GPL).
 This file is part of Cornucopia.
 
@@ -46,7 +46,7 @@ StaticPopupDialogs['DELETE_CORNUCOPIA_BARS'] = {
 		Cornucopia:DeleteSelectedBars()
 	end,
 	
-	preferredIndex = 3, timeout = 0,
+	preferredIndex = STATICPOPUP_NUMDIALOGS, timeout = 0,
 	hideOnEscape = 1, showAlert = 1,
 	exclusive = 1, whileDead = 1
 }
@@ -58,7 +58,6 @@ function Cornucopia:StartupConfig()
 	local Selector = CreateFrame('Frame', nil, self)
 	Selector:SetBackdrop({bgFile = 'Interface\\ChatFrame\\ChatFrameBackground'})
 	Selector:SetBackdropColor(1, 1, 1, .15)
-	--Selector:SetFrameStrata('FULLSCREEN')
 	Selector:SetFrameStrata('DIALOG')
 	
 	local Keyboard = CreateFrame('Frame', nil, self)
@@ -103,7 +102,7 @@ end
 function Cornucopia:ADDON_LOADED()
 	if self.Inspector and self.Toolbar then
 		self.Inspector:SetPoint('CENTER', Cornucopia_InspectorX or 0, Cornucopia_InspectorY or 0)
-		self.Toolbar:SetPoint('TOP', Cornucopia_ToolbarX or 0, Cornucopia_ToolbarX or 0)
+		self.Toolbar:SetPoint('TOP', Cornucopia_ToolbarX or 0, Cornucopia_ToolbarY or 0)
 		self:UnregisterEvent('ADDON_LOADED')
 		self:UpdateBackdrop()
 	end
@@ -126,7 +125,6 @@ function Cornucopia:CreatePanel(name, point, level)
 	local panel = CreateFrame('Frame', '$parent'..name, self, 'BasicFrameTemplate')
 	panel:SetScript('OnDragStop', panel.StopMovingOrSizing)
 	panel:SetScript('OnDragStart', panel.StartMoving)
-	--panel:SetFrameStrata('FULLSCREEN_DIALOG')
 	panel:SetFrameStrata('DIALOG')
 	panel:RegisterForDrag('LeftButton')
 	panel:SetClampedToScreen(true)
@@ -291,7 +289,6 @@ end
 function Cornucopia:ShowConfig()
 	if not InCombatLockdown() then
 		self:RegisterEvent('PLAYER_REGEN_DISABLED')
-		self:TriggerTutorial(2)
 		self:SetAlpha(0)
 		self:Show()
 		

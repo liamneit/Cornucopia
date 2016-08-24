@@ -1,4 +1,4 @@
-## Interface: 40300
+## Interface: 50400
 ## Title: Cornucopia Buffs
 ## Notes: Player buffs and debbufs bars
 

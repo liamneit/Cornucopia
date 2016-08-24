@@ -1,5 +1,5 @@
 --[[
-Copyright 2010-2012 João Cardoso
+Copyright 2010-2013 João Cardoso
 Cornucopia is distributed under the terms of the GNU General Public License (or the Lesser GPL).
 This file is part of Cornucopia.
 
@@ -31,12 +31,14 @@ if class == 'DRUID' then
 	StancesTitle, StancesDesc, StancesIcon, StealthIcon = TUTORIAL_TITLE61_DRUID, L.ShapeshiftingDesc, 768, 5215
 elseif class == 'WARRIOR' then
 	StancesTitle, StancesDesc, StancesIcon = TUTORIAL_TITLE61_WARRIOR, L.CombatStancesDesc, 2457
+elseif class == 'MONK' then
+	StancesTitle, StancesDesc, StancesIcon = TUTORIAL_TITLE61_WARRIOR, L.CombatStancesDesc, 103985
 elseif class == 'ROGUE' then
 	StancesIcon, StealthIcon = 51713, 1784
 elseif class == 'PRIEST' then
 	StancesIcon = 15473
 elseif class == 'WARLOCK' then
-	StancesIcon = 59672
+	StancesIcon = 103958
 end
 
 

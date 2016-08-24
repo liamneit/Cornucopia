@@ -1,5 +1,5 @@
 --[[
-Copyright 2010-2012 João Cardoso
+Copyright 2010-2013 João Cardoso
 Cornucopia is distributed under the terms of the GNU General Public License (or the Lesser GPL).
 This file is part of Cornucopia.
 
@@ -19,6 +19,7 @@ along with Cornucopia. If not, see <http://www.gnu.org/licenses/>.
 
 
 local Capture,_ = Cornucopia:CreateBar('Capture', {
+	vehicles = true,
 	sets = 'Cornucopia_Capture_Settings',
 	name = 'Capture Timers',
 	defaults = {

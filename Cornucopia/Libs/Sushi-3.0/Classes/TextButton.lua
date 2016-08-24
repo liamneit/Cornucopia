@@ -1,5 +1,5 @@
 --[[
-Copyright 2008-2012 João Cardoso
+Copyright 2008-2013 João Cardoso
 Sushi is distributed under the terms of the GNU General Public License (or the Lesser GPL).
 This file is part of Sushi.
 
@@ -17,17 +17,10 @@ You should have received a copy of the GNU General Public License
 along with Sushi. If not, see <http://www.gnu.org/licenses/>.
 --]]
 
-local Button = MakeSushi(1, 'Button', 'TextButton', nil, 'UIPanelButtonTemplate2', SushiButtonBase)
+local Button = MakeSushi(2, 'Button', 'TextButton', nil, 'UIPanelButtonTemplate2', SushiButtonBase)
 if not Button then
 	return
 end
-
-SushiButton = Button
-Button.SetLabel = Button.SetText
-Button.GetLabel = Button.GetText
-Button.bottom = 5
-Button.right = 11
-Button.left = 11
 
 
 --[[ Events ]]--
@@ -61,3 +54,13 @@ end
 function Button:IsSmall ()
 	return self:GetNormalFontObject() == 'GameFontNormalSmall'
 end
+
+
+--[[ Properties ]]--
+
+SushiButton = Button
+Button.SetLabel = Button.SetText
+Button.GetLabel = Button.GetText
+Button.bottom = 5
+Button.right = 11
+Button.left = 11

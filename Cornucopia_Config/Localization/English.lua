@@ -18,6 +18,7 @@ L['TopRight'] = 'Top Right'
 
 L['BinderTip'] = 'Mouse over a button and press a key to set a binging.|nPressing "Esc" will remove the binding.'
 L['MinimapButtonDesc'] = 'If you do not want to use the minimap|nbutton to enter configuration mode,|nyou can set a key binding for it.'
+L['VehicleArtDesc'] = 'If enabled, the standard vehicle|ninterface will be shown.'
 L['RulersDesc'] = 'You can hold "Alt" to temporarily|ndisable/enable the rulers.'
 
 L["EventsDesc"] = "These options allow you to make the actions in your bar to |cffffffffchange|r depending of the |cffffffffsituation|r you're in."

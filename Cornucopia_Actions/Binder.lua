@@ -1,5 +1,5 @@
 --[[
-Copyright 2010-2012 João Cardoso
+Copyright 2010-2013 João Cardoso
 Cornucopia is distributed under the terms of the GNU General Public License (or the Lesser GPL).
 This file is part of Cornucopia.
 
@@ -51,7 +51,7 @@ function CornucopiaActions_StartBinder(...)
 	local function ShowOverlays()
 		for i, button in ipairs(buttons) do
 			if (hidden or button:IsVisible()) then
-	 	     	local text = GetBindingKey('CLICK '..button:GetName()..':LeftButton') or ''
+	 	     	local text = GetBindingKey('CLICK '..button:GetName()..':LeftButton') or ' '
 		      	local overlay = overlays[i] or NewOverlay()
 		      	overlay:SetFont(overlay:GetFont(), min(button:GetHeight(), button:GetWidth() / (#text)^0.8) * button:GetEffectiveScale())
 		      	overlay:SetPoint('CENTER', button)

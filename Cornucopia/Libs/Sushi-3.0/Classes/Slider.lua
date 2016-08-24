@@ -1,5 +1,5 @@
 --[[
-Copyright 2008-2012 João Cardoso
+Copyright 2008-2013 João Cardoso
 Sushi is distributed under the terms of the GNU General Public License (or the Lesser GPL).
 This file is part of Sushi.
 
@@ -29,7 +29,7 @@ API Explained
 ]]--
 
 local TipOwner = SushiTipOwner
-local Slider = MakeSushi(1, 'Slider', 'Slider', nil, 'OptionsSliderTemplate', TipOwner)
+local Slider = MakeSushi(2, 'Slider', 'Slider', nil, 'OptionsSliderTemplate', TipOwner)
 if not Slider then
 	return
 end
@@ -360,6 +360,7 @@ end
 
 --[[ Finish ]]--
 
+Slider.GetRange = Slider.SetMinMaxValues
 Slider.SetText = Slider.SetLabel
 Slider.GetText = Slider.GetLabel
 Slider.bottom = 7

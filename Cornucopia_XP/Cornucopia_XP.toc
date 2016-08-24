@@ -1,4 +1,4 @@
-## Interface: 40300
+## Interface: 50400
 ## Title: Cornucopia XP
 ## Notes: Experience and reputation bars
 

@@ -1,5 +1,5 @@
 --[[
-Copyright 2010-2012 João Cardoso
+Copyright 2010-2013 João Cardoso
 Cornucopia is distributed under the terms of the GNU General Public License (or the Lesser GPL).
 This file is part of Cornucopia.
 
@@ -34,30 +34,34 @@ local Specials = Cornucopia:CreateBar('Stances', {
 
 function Specials:OnInitialize()
 	UIPARENT_MANAGED_FRAME_POSITIONS['MultiCastActionBarFrame'] = nil
-	UIPARENT_MANAGED_FRAME_POSITIONS['ShapeshiftBarFrame'] = nil
 	UIPARENT_MANAGED_FRAME_POSITIONS['PossessBarFrame'] = nil
+	UIPARENT_MANAGED_FRAME_POSITIONS['StanceBarFrame'] = nil
 
 	if class ~= 'SHAMAN' then
 		-- Stances
-		ShapeshiftBarFrame:UnregisterEvent('ACTIONBAR_PAGE_CHANGED')
-		ShapeshiftBarFrame:DisableDrawLayer('BACKGROUND') -- remove default cluster artwork: left
-		ShapeshiftBarFrame:DisableDrawLayer('BORDER') -- right
-		ShapeshiftBarFrame:SetParent(self)
+		ActionBarController:UnregisterEvent('ACTIONBAR_PAGE_CHANGED')
 		
-		for i = 1, NUM_SHAPESHIFT_SLOTS do
-			local button = _G['ShapeshiftButton'..i]
+		StanceBarFrame:DisableDrawLayer('BACKGROUND') -- remove default cluster artwork: left
+		StanceBarFrame:DisableDrawLayer('BORDER') -- right
+		StanceBarFrame:SetParent(self)
+		StanceBarFrame:Show()
+		
+		for i = 1, NUM_STANCE_SLOTS do
+			local button = _G['StanceButton'..i]
 			button:ClearAllPoints()
 			button:SetPoint('LEFT', self, (i-1) * 42 + 3, 0)
 			button:SetSize(35, 35)
 		end
 		
-		function ShapeshiftBar_Update()
+		function StanceBar_Update()
 			if not InCombatLockdown() then
 				self:SetSize(max(42 * GetNumShapeshiftForms() - 2, 1), 42)
 			end
+			
+			--StanceBar_UpdateState()
 		end
 		
-		ShapeshiftBar_Update()
+		StanceBar_Update()
 	else
 		-- Totems
 		MultiCastActionBarFrame:SetParent(self)
@@ -93,9 +97,9 @@ function Specials:OnToolsShown()
 	CornucopiaActions_StartBinder (self)
 end
 
-function	Specials:GetBindButtons()
+function Specials:GetBindButtons()
 	if class ~= 'SHAMAN' then
-		return {ShapeshiftBarFrame:GetChildren()}
+		return {StanceBarFrame:GetChildren()}
 	else
 		local buttons = {MultiCastSummonSpellButton, MultiCastRecallSpellButton}
 

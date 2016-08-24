@@ -1,4 +1,4 @@
-## Interface: 40300
+## Interface: 50400
 ## Title: Cornucopia Actions
 ## Notes: Action buttons, pet, stances, totems and possess bars
 

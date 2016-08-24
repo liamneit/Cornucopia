@@ -1,5 +1,5 @@
 --[[
-Copyright 2010, 2011 João Cardoso
+Copyright 2010-2013 João Cardoso
 Cornucopia is distributed under the terms of the GNU General Public License (or the Lesser GPL).
 This file is part of Cornucopia.
 
@@ -18,19 +18,25 @@ along with Cornucopia. If not, see <http://www.gnu.org/licenses/>.
 --]]
 
 local Cornucopia = CreateFrame('Button', 'Cornucopia')
+
 BINDING_HEADER_CORNUCOPIA = 'Cornucopia'
+FRAMELOCK_STATES.VEHICLES = {}
+tinsert(FRAMELOCK_STATE_PRIORITIES, "VEHICLES")
 
 
 --[[ Startup ]]--
 
 function Cornucopia:Startup()
-	self.Bars = {}; self.Groups = {}; self.Locals = {}
-	self:SetScript('OnEvent', self.Initialize)
+	self:SetScript('OnEvent', function(self, event, ...) self[event](self, ...) end)
+	self:RegisterEvent('UNIT_ENTERING_VEHICLE')
+	self:RegisterEvent('UNIT_EXITED_VEHICLE')
 	self:RegisterEvent('VARIABLES_LOADED')
+	
 	self.__index = self
+	self.Bars = {}; self.Groups = {}; self.Locals = {}
 end
 
-function Cornucopia:Initialize()
+function Cornucopia:VARIABLES_LOADED()
 	-- Bars & Groups
 	for id, group in self:IterateGroups() do
 		group:InitializeGroup(id)
@@ -48,6 +54,31 @@ function Cornucopia:Initialize()
 	if not Cornucopia_Tutorials then
 		LoadAddOn('Cornucopia_Config')
 	end
+
+	self:ToggleVehicle()
+end
+
+
+--[[ Vehicle ]]--
+
+function Cornucopia:ToggleVehicle()
+	OverrideActionBar:ClearAllPoints()
+
+	if Cornucopia_HideVehicle then
+		OverrideActionBar:SetPoint('LEFT', OverrideActionBar:GetParent(), 'RIGHT', 500, 0)
+	else
+		OverrideActionBar:SetPoint('BOTTOM')
+	end
+end
+
+function Cornucopia:UNIT_ENTERING_VEHICLE()
+	if not Cornucopia_HideVehicle then
+		AddFrameLock("VEHICLES")
+	end
+end
+
+function Cornucopia:UNIT_EXITED_VEHICLE()
+	RemoveFrameLock("VEHICLES")
 end
 
 
@@ -69,12 +100,24 @@ function Cornucopia:InitializeBar ()
 	self:SetScale(sets.scale or 1)
 	self:SetAlpha(sets.alpha or 1)
 	self:SetClampedToScreen(true)
+	
+	if not self.petBattles then
+		self:AddToFrameLock('PETBATTLES')
+	end
+	
+	if not self.vehicles then
+		self:AddToFrameLock('VEHICLES')
+	end
 
 	if sets.hide then
 		self:Hide()
 	end
 
 	self:Fire('OnInitialize')
+end
+
+function Cornucopia:AddToFrameLock (lock)
+	FRAMELOCK_STATES[lock][self:GetName()] = 'hidden'
 end
 
 function Cornucopia:IterateBars ()

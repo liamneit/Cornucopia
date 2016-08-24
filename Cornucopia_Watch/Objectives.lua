@@ -1,5 +1,5 @@
 --[[
-Copyright 2010-2012 João Cardoso
+Copyright 2010-2013 João Cardoso
 Cornucopia is distributed under the terms of the GNU General Public License (or the Lesser GPL).
 This file is part of Cornucopia.
 
@@ -19,6 +19,7 @@ along with Cornucopia. If not, see <http://www.gnu.org/licenses/>.
 
 
 local Objectives = Cornucopia:CreateBar('Objectives', {
+	vehicles = true,
 	sets = 'Cornucopia_Objectives_Settings',
 	name = 'Objectives',
 	minWidth = 120,
@@ -96,7 +97,7 @@ function Objectives:UpdateHeight(lastLine, _, maxWidth)
 	if type(lastLine) == 'table' and lastLine.GetBottom then -- Just for safety, you never know
 		Objectives:SetHeight((Objectives:GetTop() or 0) - (lastLine:GetBottom() or 0) + 4)
 	end
-	return lastLine, maxWidth, 0
+	return lastLine, maxWidth, 0, 0
 end
 
 function Objectives:ShowObjectives()
@@ -167,5 +168,5 @@ function Objectives:DisplayFakeQuests()
 		maxWidth = max(maxWidth, line.text:GetWidth() + line.dash:GetWidth())
 	end
 	
-	return FakeQuests[7], maxWidth, 3
+	return FakeQuests[7], maxWidth, 3, 0
 end

@@ -1,5 +1,5 @@
 --[[
-Copyright 2010-2012 João Cardoso
+Copyright 2010-2013 João Cardoso
 Cornucopia is distributed under the terms of the GNU General Public License (or the Lesser GPL).
 This file is part of Cornucopia.
 
@@ -16,7 +16,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Cornucopia. If not, see <http://www.gnu.org/licenses/>.
 --]]
-
 
 -- Positions
 local FAKE = function() end
@@ -38,7 +37,6 @@ for _, frame in ipairs(NO_MANAGE) do
 	frame.ignoreFramePositionManager = true
 end
 
-
 -- Frames
 local disable = function(frame)
 	frame:UnregisterAllEvents()
@@ -46,18 +44,14 @@ local disable = function(frame)
 	frame:Hide()
 end
 
-disable(VehicleMenuBarPitchSlider)
-disable(VehicleMenuBar)
-
-disable(BonusActionBarFrame)
 disable(MainMenuBarOverlayFrame)
-disable(MainMenuBar)
-
 disable(MainMenuBarArtFrame)
+disable(MultiBarRight)
+
+MainMenuBar:SetScript("OnShow", nil)
 MainMenuBarArtFrame:RegisterEvent('KNOWN_CURRENCY_TYPES_UPDATE')
 MainMenuBarArtFrame:RegisterEvent('CURRENCY_DISPLAY_UPDATE')
 MainMenuBarArtFrame:RegisterEvent('BAG_UPDATE')
-
 
 -- Options
 local disable = function(id)

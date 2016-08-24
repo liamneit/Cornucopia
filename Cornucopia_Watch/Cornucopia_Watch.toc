@@ -1,4 +1,4 @@
-## Interface: 40300
+## Interface: 50400
 ## Title: Cornucopia Watch
 ## Notes: Quest tracking, durability, capture points,...
 
