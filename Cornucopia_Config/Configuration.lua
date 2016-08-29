@@ -289,6 +289,7 @@ end
 function Cornucopia:ShowConfig()
 	if not InCombatLockdown() then
 		self:RegisterEvent('PLAYER_REGEN_DISABLED')
+		self:TriggerTutorial(2)
 		self:SetAlpha(0)
 		self:Show()
 		

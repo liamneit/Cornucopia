@@ -130,7 +130,7 @@ function Actions:Update()
 		local button = self:GetButton(i) or self:NewButton(i)
 		button:SetPoint('TOPRIGHT', self, -x * size - 2, -y * size - 2)
 		button:SetAttribute('statehidden', nil)
-		--button:Show()
+		button:Show()
 		
 		button:SetAttribute('id-2', 120 + numButtons + i)
 		button:SetAttribute('id-1', 120 + i)

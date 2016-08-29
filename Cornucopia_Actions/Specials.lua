@@ -58,7 +58,7 @@ function Specials:OnInitialize()
 				self:SetSize(max(42 * GetNumShapeshiftForms() - 2, 1), 42)
 			end
 			
-			--StanceBar_UpdateState()
+			StanceBar_UpdateState()
 		end
 		
 		StanceBar_Update()

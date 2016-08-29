@@ -1,5 +1,5 @@
 --[[
-Copyright 2010-2015 João Cardoso
+Copyright 2010-2013 João Cardoso
 CustomTutorials is distributed under the terms of the GNU General Public License (or the Lesser GPL).
 This file is part of CustomTutorials.
 
@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with CustomTutorials. If not, see <http://www.gnu.org/licenses/>.
 --]]
 
-local Lib = LibStub:NewLibrary('CustomTutorials-2.1', 6)
+local Lib = LibStub:NewLibrary('CustomTutorials-2.1', 1)
 if Lib then
 	Lib.NewFrame, Lib.NewButton, Lib.UpdateFrame = nil
 	Lib.numFrames = Lib.numFrames or 1
@@ -32,15 +32,10 @@ local Frames = Lib.frames
 
 --[[ Internal API ]]--
 
-local function UpdateFrame(frame, i)
-	local data = frame.data[i]
+local function UpdateFrame(frame, index)
+	local data = frame.data[index]
 	if not data then
 		return
-	end
-
-	-- Callback
-	if frame.data.onShow then
-		frame.data.onShow(frame.data, i)
 	end
 
 	-- Frame
@@ -48,26 +43,15 @@ local function UpdateFrame(frame, i)
 	frame.text:SetWidth(frame:GetWidth() - (data.textX or 30) * 2)
 	frame.text:SetText(data.text)
 	
+	frame.image:SetPoint('TOP', frame, data.imageX or 0, (data.imageY or 40) * -1)
+	frame.image:SetTexture(data.image)
+	
 	frame:ClearAllPoints()
 	frame:SetPoint(data.point or 'CENTER', data.anchor or UIParent, data.relPoint or data.point or 'CENTER', data.x or 0, data.y or 0)
 	frame:SetHeight((data.height or data.image and 220 or 100) + (data.text and frame.text:GetHeight() + (data.textY or 20) or 0))
 	frame.TitleText:SetText(data.title or frame.data.title)
-	frame.i = i
+	frame.i = index
 	frame:Show()
-	
-	-- Image
-	for _, image in pairs(frame.images) do
-		image:Hide()
-	end
-	
-	if data.image then
-		local img = frame.images[i] or frame:CreateTexture()
-		img:SetPoint('TOP', frame, data.imageX or 0, (data.imageY or 40) * -1)
-		img:SetTexture(data.image)
-		img:Show()
-		
-		frame.images[i] = img
-	end
 	
 	-- Shine
 	if data.shine then
@@ -82,20 +66,19 @@ local function UpdateFrame(frame, i)
 	end
 	
 	-- Buttons
-	if i == 1 then
+	if index == 1 then
 		frame.prev:Disable()
 	else
 		frame.prev:Enable()
 	end
 
 	-- Save
-	local sv = frame.data.key or frame.data.savedvariable
+	local sv = frame.data.savedvariable
 	if sv then
-		local table = frame.data.key and frame.data.savedvariable or _G
-		table[sv] = max(i, table[sv] or 0)
+		_G[sv] = max(index, _G[sv] or 0)
 	end
 	
-	if i < (frame.unlocked or 0) then
+	if index < (frame.unlocked or 0) then
 		frame.next:Enable()
 	else
 		frame.next:Disable()
@@ -126,16 +109,15 @@ local function NewFrame(data)
 	frame.text = frame:CreateFontString(nil, nil, 'GameFontHighlight')
 	frame.prev = NewButton(frame, 'Prev', -1)
 	frame.next = NewButton(frame, 'Next', 1)
+	frame.image = frame:CreateTexture()
 	frame.shine = CreateFrame('Frame')
-	frame.images = {}
 	frame.data = data
 	
 	frame.shine:SetBackdrop({edgeFile = 'Interface\\TutorialFrame\\UI-TutorialFrame-CalloutGlow', edgeSize = 16})
 	frame.Inset:SetPoint('TOPLEFT', 4, -23)
-	frame.Inset.Bg:SetColorTexture(0,0,0)
+	frame.Inset.Bg:SetTexture(0,0,0)
 	frame.text:SetJustifyH('LEFT')
 	frame:SetFrameStrata('DIALOG')
-	frame:SetClampedToScreen(true)
 	frame:EnableMouse(true)
 	frame:SetToplevel(true)
 	frame:SetWidth(350)
@@ -158,10 +140,9 @@ local function NewFrame(data)
 	flash:SetLooping('BOUNCE')
 	frame.flash = flash
 	
-	local step = flash:CreateAnimation('Alpha')
-	step:SetDuration(.75)
-	step:SetFromAlpha(1)
-	step:SetToAlpha(.3)
+	local anim = flash:CreateAnimation('Alpha')
+	anim:SetDuration(.75)
+	anim:SetChange(-.7)
 	
 	Lib.numFrames = Lib.numFrames + 1
 	return frame
@@ -179,19 +160,18 @@ function Lib:RegisterTutorials(data)
 	end
 end
 
-function Lib:TriggerTutorial(index, maxAdvance)
+function Lib:TriggerTutorial(index, force)
 	assert(type(index) == 'number', 'TriggerTutorial: 2nd arg must be a number', 2)
 	assert(self, 'RegisterTutorials: 1st arg was not provided', 2)
 
 	local frame = Lib.frames[self]
 	if frame then
-		local sv = frame.data.key or frame.data.savedvariable
-		local table = frame.data.key and frame.data.savedvariable or _G
-		local last = sv and table[sv] or 0
+		local sv = frame.data.savedvariable
+		local last = sv and _G[sv] or 0
 		
 		if index > last then
 			frame.unlocked = index
-			UpdateFrame(frame, (maxAdvance == true or not sv) and index or last + (maxAdvance or 1))
+			UpdateFrame(frame, (force or not sv) and index or last + 1)
 		end
 	end
 end
@@ -201,12 +181,10 @@ function Lib:ResetTutorials()
 
 	local frame = Lib.frames[self]
 	if frame then
-		local sv = frame.data.key or frame.data.savedvariable
+		local sv = frame.data.savedvariable
 		if sv then
-			local table = frame.data.key and frame.data.savedvariable or _G
-			table[sv] = false
+			_G[sv] = nil
 		end
-		
 		frame:Hide()
 	end
 end
