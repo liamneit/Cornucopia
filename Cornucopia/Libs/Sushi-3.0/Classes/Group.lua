@@ -1,5 +1,5 @@
 --[[
-Copyright 2008-2013 João Cardoso
+Copyright 2008-2015 João Cardoso
 Sushi is distributed under the terms of the GNU General Public License (or the Lesser GPL).
 This file is part of Sushi.
 
@@ -18,7 +18,7 @@ along with Sushi. If not, see <http://www.gnu.org/licenses/>.
 --]]
 
 local CallHandler = SushiCallHandler
-local Group = MakeSushi(1, 'Frame', 'Group', nil, nil, CallHandler)
+local Group = MakeSushi(2, 'Frame', 'Group', nil, nil, CallHandler)
 if not Group then
 	return
 end
@@ -42,8 +42,9 @@ function Group:OnAcquire()
 end
 
 function Group:OnRelease()
+	self:ReleaseChildren()
+	self:SetCall('UpdateChildren', nil)
 	CallHandler.OnRelease(self)
-	self:SetChildren(nil)
 end
 
 
@@ -185,15 +186,15 @@ function Group:UpdateLayout ()
 end
 
 function Group:Layout ()
-	self.limit = self:GetLimit()
-	x, y = 0, 0
-	line = 0
+	local x, y = 0, 0
+	local line = 0
 	
-	function breakLine()
+	local function breakLine()
 		y = y + line
 		line, x = 0, 0
 	end
-	
+
+	self.limit = self:GetLimit()
 	for i, child in ipairs(self.layout) do
 		if child ~= 1 then
 			local top, left = child.top or 0, child.left or 0
@@ -242,6 +243,7 @@ Group.SetResize = Group.SetResizing
 
 Group.CreateBreak = Group.AddBreak
 Group.LineBreak = Group.AddBreak
+Group.Break = Group.AddBreak
 
 Group.AppendChild = Group.BindChild
 Group.AddChild = Group.BindChild

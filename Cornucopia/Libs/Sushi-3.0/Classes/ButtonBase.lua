@@ -1,5 +1,5 @@
 --[[
-Copyright 2008-2013 João Cardoso
+Copyright 2008-2015 João Cardoso
 Sushi is distributed under the terms of the GNU General Public License (or the Lesser GPL).
 This file is part of Sushi.
 
@@ -29,12 +29,12 @@ end
 --[[ Events ]]--
 
 function Button:OnCreate ()
-	TipOwner.OnCreate (self)
+	TipOwner.OnCreate(self)
 	self:SetScript('OnClick', self.OnClick)
 end
 
 function Button:OnRelease ()
-	TipOwner.OnRelease (self)
+	TipOwner.OnRelease(self)
 	self:SetDisabled(nil)
 end
 

@@ -1,5 +1,5 @@
 --[[
-Copyright 2008-2013 João Cardoso
+Copyright 2008-2015 João Cardoso
 Sushi is distributed under the terms of the GNU General Public License (or the Lesser GPL).
 This file is part of Sushi.
 
@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with Sushi. If not, see <http://www.gnu.org/licenses/>.
 --]]
 
-local Group = MakeSushi(2, nil, 'MagicGroup', nil, nil, SushiGroup)
+local Group = MakeSushi(5, nil, 'MagicGroup', nil, nil, SushiGroup)
 if not Group then
 	return
 end
@@ -44,13 +44,22 @@ end
 --[[ Addon ]]--
 
 function Group:SetAddon (addon)
-	self.addon = addon
-	self.sets = addon .. '_'
-	self.L = _G[self.sets .. 'Locals']
+	self.name = addon
+	self.prefix = addon .. '_'
+	self.sets = _G[self.prefix .. 'Sets'] or _G[addon].Sets
+	self.L = _G[self.prefix .. 'Locals'] or _G[addon].Locals
 end
 
 function Group:GetAddon ()
-	return self.addon
+	return self.name
+end
+
+function Group:GetAddonInfo ()
+	for i = 1, GetNumAddOns() do
+		if GetAddOnInfo(i) ==  self.name then
+			return GetAddOnInfo(i)
+		end
+	end
 end
 
 
@@ -73,8 +82,8 @@ function Group:SetChildren (...)
 end
 
 function Group:CreateMagics()
-	self:CreateHeader(self.addon, 'GameFontNormalLarge')
-	self:CreateHeader('Description', 'GameFontHighlightSmall').bottom = 11
+	self:CreateHeader(self.name, 'GameFontNormalLarge')
+	self:CreateHeader(self.L['Description'] or select(3, self:GetAddonInfo()), 'GameFontHighlightSmall').bottom = 11
 	self:FireCall('MagicChildren')
 end
 
@@ -92,18 +101,19 @@ end
 
 function Group:Create(class, text, arg, disabled, small)
 	local child = self:CreateChild(class)
-	local arg = self.sets .. (arg or text)
+	local arg = (self.sets and '' or self.prefix) .. (arg or text)
+	local sets = self.sets or _G
 	local L = self.L
 	
 	child:SetTip(L[text .. 'Tip'], L[text .. 'TipText'])
 	child:SetLabel(L[text] or text)
 	child:SetDisabled(disabled)
-	child:SetValue(_G[arg])
+	child:SetValue(sets[arg])
 	child:SetSmall(small)
 	
 	child.left = (child.left or 0) + (small and 10 or 0)
 	child:SetCall('OnInput', function(self, v)
-		_G[arg] = v
+		sets[arg] = v
 	end)
 	return child
 end

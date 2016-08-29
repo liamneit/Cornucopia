@@ -1,5 +1,5 @@
 --[[
-Copyright 2008-2013 João Cardoso
+Copyright 2008-2015 João Cardoso
 Sushi is distributed under the terms of the GNU General Public License (or the Lesser GPL).
 This file is part of Sushi.
 
@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with Sushi. If not, see <http://www.gnu.org/licenses/>.
 --]]
 
-local Button = MakeSushi(2, 'Button', 'TextButton', nil, 'UIPanelButtonTemplate2', SushiButtonBase)
+local Button = MakeSushi(3, 'Button', 'TextButton', nil, 'UIPanelButtonTemplate', SushiButtonBase)
 if not Button then
 	return
 end
@@ -36,7 +36,7 @@ end
 
 function Button:SetText (text)
 	self:GetFontString():SetText(text)
-	self:SetWidth(self:GetTextWidth() + 15)
+	self:SetWidth(self:GetTextWidth() + 20)
 end
 
 function Button:SetSmall (small)

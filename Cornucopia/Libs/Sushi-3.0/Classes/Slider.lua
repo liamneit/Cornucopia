@@ -1,5 +1,5 @@
 --[[
-Copyright 2008-2013 João Cardoso
+Copyright 2008-2015 João Cardoso
 Sushi is distributed under the terms of the GNU General Public License (or the Lesser GPL).
 This file is part of Sushi.
 
@@ -207,9 +207,8 @@ end
 function Slider:SetValue(value, update)
 	local minV, maxV = self:GetMinMaxValues()
 	local value = self:GetRoundedValue(max(min(value, maxV), minV))
-	local changed = self.value ~= value
 	
-	if changed then
+	if self.value ~= value then
 		self.value = value
 		self.__type.SetValue(self, value)
 		self:UpdateValueText()

@@ -1,5 +1,5 @@
 --[[
-Copyright 2008-2013 João Cardoso
+Copyright 2008-2015 João Cardoso
 Sushi is distributed under the terms of the GNU General Public License (or the Lesser GPL).
 This file is part of Sushi.
 
@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with Sushi. If not, see <http://www.gnu.org/licenses/>.
 --]]
 
-local Handler = MakeSushi(1, nil, 'CallHandler', UIParent)
+local Handler = MakeSushi(3, nil, 'CallHandler', UIParent)
 if not Handler then
 	return
 end
@@ -27,12 +27,14 @@ end
 
 function Handler:OnAcquire ()
 	self.calls = {}
+	self:ClearAllPoints()
 	self:Show()
 end
 
 function Handler:OnRelease ()
 	self:SetParent(UIParent)
 	self:ClearAllPoints()
+	self:SetPoint('TOP', UIParent, 'BOTTOM') -- outside of screen
 	self:Hide()
 end
 
