@@ -2,7 +2,7 @@
 ## Title: Cornucopia Config
 
 ## Notes: Load on demand configuration for Cornucopia
-## Author: Jaliborc (João Cardoso)
+## Author: Jaliborc (João Cardoso) Edited by LiamNeit 2016
 ## X-License: GNU General Public License Version 3
 
 ## SavedVariables: Cornucopia_Opaque, Cornucopia_HideRulers, Cornucopia_InspectorX, Cornucopia_InspectorY, Cornucopia_ToolbarX, Cornucopia_ToolbarY

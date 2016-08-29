@@ -2,7 +2,7 @@
 ## Title: Cornucopia
 ## Notes: An elegant interface builder
 
-## Author: Jaliborc (João Cardoso)
+## Author: Jaliborc (João Cardoso) Edited by LiamNeit 2016
 ## X-License: GNU General Public License Version 3
 ## SavedVariables: Cornucopia_Tutorials, Cornucopia_HideButton, Cornucopia_HideVehicle
 ## Version: 3.16

@@ -2,7 +2,7 @@
 ## Title: Cornucopia Menus
 ## Notes: Menu and bags bars
 
-## Author: Jaliborc (João Cardoso)
+## Author: Jaliborc (João Cardoso) Edited by LiamNeit 2016
 ## X-License: GNU General Public License Version 3
 ## X-Category:
 

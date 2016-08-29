@@ -1,4 +1,7 @@
 --[[
+
+Edited by LiamNeit 2016
+
 Copyright 2010-2013 João Cardoso
 Cornucopia is distributed under the terms of the GNU General Public License (or the Lesser GPL).
 This file is part of Cornucopia.
@@ -22,12 +25,16 @@ local Menu = Cornucopia:CreateBar('Menu', {
 	sets = 'Cornucopia_Menu_Sets',
 	defaults = {
 		point = 'BottomLeft', relPoint = 'Bottom',
-		x = 5, y = 1.8,
+		-- x = 5, y = 1.8,
 		level = 2,
+		y = 26.51506546949789,
+	        x = -622.4663246334246,
 	}
 })
 
 function Menu:OnInitialize()
+	
+
 	self:SetSize(#MICRO_BUTTONS * 25, 36)
 	self:SetScript('OnShow', self.OnShow)
 	self:OnShow()
@@ -35,5 +42,10 @@ end
 
 function Menu:OnShow()
 	UpdateMicroButtonsParent(self)
-	MoveMicroButtons('BOTTOMLEFT', self, 'BOTTOMLEFT', 0,0)
+	---MoveMicroButtons('BOTTOMLEFT', self, 'BOTTOMLEFT', 0,0)
+	-- Just set Anchor but do not Refresh for 5.4.1
+	CharacterMicroButton:SetPoint('BOTTOMLEFT', self, 'BOTTOMLEFT', 0,0);
 end
+
+
+

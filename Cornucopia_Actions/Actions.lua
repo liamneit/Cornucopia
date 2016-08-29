@@ -1,4 +1,7 @@
 --[[
+
+Edited by LiamNeit 2016
+
 Copyright 2010-2013 João Cardoso
 Cornucopia is distributed under the terms of the GNU General Public License (or the Lesser GPL).
 This file is part of Cornucopia.
@@ -50,7 +53,7 @@ local IDs = Actions.IDs
 local Stances, Stealth
 
 if class == 'DRUID' then
-	Stances, Stealth = {'stance:1', 'stance:3'}, 'stealth,stance:3'
+	Stances, Stealth = {'stance:1', 'stance:2'}, 'stealth,stance:2'
 elseif class == 'WARRIOR' then
 	Stances = {'stance:2', 'stance:3'}
 elseif class == 'MONK' then
@@ -130,7 +133,7 @@ function Actions:Update()
 		local button = self:GetButton(i) or self:NewButton(i)
 		button:SetPoint('TOPRIGHT', self, -x * size - 2, -y * size - 2)
 		button:SetAttribute('statehidden', nil)
-		button:Show()
+		--button:Show()
 		
 		button:SetAttribute('id-2', 120 + numButtons + i)
 		button:SetAttribute('id-1', 120 + i)
